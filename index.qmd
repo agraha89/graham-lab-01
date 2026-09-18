@@ -25,7 +25,6 @@ library(psych)
 library(broom)
 library(gt)
 library(performance)
-filter(age >= 50) |>
 
 # Load the example BFI data included with the psych package
 data("bfi", package = "psych")
@@ -38,6 +37,7 @@ bfi_keys <- list(
   Neuroticism = c("N1", "N2", "N3", "N4", "N5"),
   Openness = c("O1", "-O2", "O3", "O4", "-O5")
 )
+
 
 ```
 
@@ -77,6 +77,7 @@ bfi_analysis <- bfi_scoring$scores |>
       labels = c("Male", "Female")
     )
   )
+
 ```
 
 Scale scores represent the mean of the available items belonging to each personality dimension. Missing item responses were not imputed; scale scores were instead calculated from the available keyed items.
