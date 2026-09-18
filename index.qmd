@@ -37,12 +37,13 @@ bfi_keys <- list(
   Neuroticism = c("N1", "N2", "N3", "N4", "N5"),
   Openness = c("O1", "-O2", "O3", "O4", "-O5")
 )
+
 ```
 
 # Methods
 
 ## Data
- filter(age > 50) |> 
+
 We analyzed the bfi data set distributed with the `psych` package. The original data set contains `r nrow(bfi)` participants and `r ncol(bfi)` variables. The first 25 variables contain personality items measuring five broad personality dimensions; the remaining variables contain demographic information.
 
 The five personality dimensions were Agreeableness, Conscientiousness, Extraversion, Neuroticism, and Openness. Items were scored using the scoring keys supplied with the `psych` package, including reverse-scoring where required.
@@ -115,7 +116,7 @@ descriptive_table <- bfi_analysis |>
     max,
     skew
   )
-
+#  filter(age > 50)
 # scoreItems() provides coefficient alpha for each scored scale.
 reliability_table <- tibble(
   Scale = names(bfi_keys),
@@ -167,7 +168,7 @@ model_data <- bfi_analysis |>
     Conscientiousness
   ) |>
   drop_na()
-
+#  filter(age > 50)
 ```
 
 The regression analyses therefore used `r nrow(model_data)` participants.
