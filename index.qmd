@@ -42,7 +42,7 @@ bfi_keys <- list(
 # Methods
 
 ## Data
-
+ filter(age > 50) |> 
 We analyzed the bfi data set distributed with the `psych` package. The original data set contains `r nrow(bfi)` participants and `r ncol(bfi)` variables. The first 25 variables contain personality items measuring five broad personality dimensions; the remaining variables contain demographic information.
 
 The five personality dimensions were Agreeableness, Conscientiousness, Extraversion, Neuroticism, and Openness. Items were scored using the scoring keys supplied with the `psych` package, including reverse-scoring where required.
@@ -166,7 +166,6 @@ model_data <- bfi_analysis |>
     Extraversion,
     Conscientiousness
   ) |>
-  filter(age > 30) |> 
   drop_na()
 
 ```
