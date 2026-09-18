@@ -25,6 +25,7 @@ library(psych)
 library(broom)
 library(gt)
 library(performance)
+filter(age >= 50) |>
 
 # Load the example BFI data included with the psych package
 data("bfi", package = "psych")
@@ -76,7 +77,6 @@ bfi_analysis <- bfi_scoring$scores |>
       labels = c("Male", "Female")
     )
   )
-
 ```
 
 Scale scores represent the mean of the available items belonging to each personality dimension. Missing item responses were not imputed; scale scores were instead calculated from the available keyed items.
@@ -116,13 +116,11 @@ descriptive_table <- bfi_analysis |>
     max,
     skew
   )
-#  filter(age > 50)
 # scoreItems() provides coefficient alpha for each scored scale.
 reliability_table <- tibble(
   Scale = names(bfi_keys),
   Alpha = as.numeric(bfi_scoring$alpha)
 )
-
 scale_summary <- descriptive_table |>
   left_join(reliability_table, by = "Scale")
 
@@ -160,15 +158,15 @@ Before fitting the models, cases with missing values on the variables required b
 #| label: regression-data
 
 model_data <- bfi_analysis |>
+  filter(age >= 50) |>
   select(
     Neuroticism,
     age,
     gender,
     Extraversion,
     Conscientiousness
-  ) |>
-  drop_na()
-#  filter(age > 50)
+     ) |>
+   drop_na()
 ```
 
 The regression analyses therefore used `r nrow(model_data)` participants.
@@ -186,7 +184,6 @@ model_2 <- lm(
   Extraversion ~ age + gender + Neuroticism + Conscientiousness,
   data = model_data
 )
-
 ```
 
 ```{r}
@@ -302,7 +299,6 @@ final_model_table <- tidy(
       TRUE ~ sprintf("%.3f", p.value)
     )
   )
-
 final_model_table |>
   select(
     term,
